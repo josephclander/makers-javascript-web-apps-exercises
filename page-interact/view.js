@@ -1,13 +1,17 @@
 class View {
   constructor() {
     this.mainContainerEl = document.querySelector('#main-container');
-
-    console.log(this.mainContainerEl);
   }
-  addParagraph() {
+  addParagraph(text) {
     const p = document.createElement('P');
-    p.textContent = 'This paragraph has been dynamically added by JavaScript!';
+    p.textContent = text;
     this.mainContainerEl.append(p);
+  }
+  clearParagraphs() {
+    const paragraphs = document.querySelectorAll('p');
+    paragraphs.forEach((p) => {
+      this.mainContainerEl.removeChild(p);
+    });
   }
 }
 
