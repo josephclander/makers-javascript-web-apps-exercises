@@ -1,5 +1,8 @@
+const NotesView = require('./src/notesView');
 const NotesModel = require('./src/notesModel');
 
-const model = new NotesModel();
-model.addNote('Learn how to connect to the DOM.');
-console.log(model.getNotes());
+model = new NotesModel();
+model.addNote('test1');
+model.addNote('test2');
+view = new NotesView(model);
+view.displayNotes();
