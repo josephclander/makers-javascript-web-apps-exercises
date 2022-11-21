@@ -1,10 +1,14 @@
 class MessageView {
   constructor() {
     this.mainEl = document.querySelector('#main-container');
-    this.buttonEl = document.querySelector('#show-message-button');
+    this.showButtonEl = document.querySelector('#show-message-button');
+    this.hideButtonEl = document.querySelector('#hide-message-button');
 
-    this.buttonEl.addEventListener('click', () => {
+    this.showButtonEl.addEventListener('click', () => {
       this.displayMessage();
+    });
+    this.hideButtonEl.addEventListener('click', () => {
+      this.hideMessage();
     });
   }
 
@@ -13,6 +17,10 @@ class MessageView {
     el.setAttribute('id', 'message');
     el.textContent = 'This message displayed by JavaScript';
     this.mainEl.append(el);
+  }
+
+  hideMessage() {
+    document.querySelector('#message').remove();
   }
 }
 

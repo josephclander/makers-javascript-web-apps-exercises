@@ -9,9 +9,13 @@
       var MessageView2 = class {
         constructor() {
           this.mainEl = document.querySelector("#main-container");
-          this.buttonEl = document.querySelector("#show-message-button");
-          this.buttonEl.addEventListener("click", () => {
+          this.showButtonEl = document.querySelector("#show-message-button");
+          this.hideButtonEl = document.querySelector("#hide-message-button");
+          this.showButtonEl.addEventListener("click", () => {
             this.displayMessage();
+          });
+          this.hideButtonEl.addEventListener("click", () => {
+            this.hideMessage();
           });
         }
         displayMessage() {
@@ -19,6 +23,9 @@
           el.setAttribute("id", "message");
           el.textContent = "This message displayed by JavaScript";
           this.mainEl.append(el);
+        }
+        hideMessage() {
+          document.querySelector("#message").remove();
         }
       };
       module.exports = MessageView2;
