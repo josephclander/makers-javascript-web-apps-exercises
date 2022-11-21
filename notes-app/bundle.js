@@ -1,1 +1,1 @@
-(()=>{console.log("The notes app is running!");})();
+(()=>{var c=(o,t)=>()=>(t||o((t={exports:{}}).exports,t),t.exports);var n=c((i,s)=>{var e=class{constructor(){this.notes=[]}getNotes(){return this.notes}addNote(t){this.notes.push(t)}reset(){this.notes=[]}};s.exports=e});var h=n(),r=new h;r.addNote("Learn how to connect to the DOM.");console.log(r.getNotes());})();
