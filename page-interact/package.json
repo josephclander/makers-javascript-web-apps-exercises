@@ -1,0 +1,18 @@
+{
+  "name": "page-interact",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watch",
+    "build": "esbuild index.js --bundle  --outfile=bundle.js --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "esbuild": "^0.14.2",
+    "jest": "^27.4.3",
+    "jest-environment-jsdom": "^29.1.2"
+  }
+}
