@@ -13,10 +13,15 @@ describe('MessageView', () => {
   it('shows the message', () => {
     const view = new MessageView();
 
+    const input = document.querySelector('#message-input');
+    input.value = "This is Joe's message.";
+
     const buttonEl = document.querySelector('#show-message-button');
     buttonEl.click();
 
-    expect(document.querySelector('#message')).not.toBeNull();
+    expect(document.querySelector('#message').textContent).toEqual(
+      "This is Joe's message."
+    );
   });
 
   it('hides the message', () => {

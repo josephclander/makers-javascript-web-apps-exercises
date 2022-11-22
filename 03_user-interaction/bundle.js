@@ -11,6 +11,7 @@
           this.mainEl = document.querySelector("#main-container");
           this.showButtonEl = document.querySelector("#show-message-button");
           this.hideButtonEl = document.querySelector("#hide-message-button");
+          this.input = document.querySelector("#message-input");
           this.showButtonEl.addEventListener("click", () => {
             this.displayMessage();
           });
@@ -21,10 +22,11 @@
         displayMessage() {
           const el = document.createElement("DIV");
           el.setAttribute("id", "message");
-          el.textContent = "This message displayed by JavaScript";
+          el.textContent = this.input.value;
           this.mainEl.append(el);
         }
         hideMessage() {
+          this.input.value = "";
           document.querySelector("#message").remove();
         }
       };
