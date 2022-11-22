@@ -1,10 +1,21 @@
-const model = require('./notesModel');
-
 class NotesView {
   constructor(model) {
-    this.mainEl = document.querySelector('#main');
     this.model = model;
+
+    this.mainEl = document.querySelector('#main');
+    this.msgInput = document.querySelector('#message-input');
+    this.submitBtn = document.querySelector('#message-submit');
+
+    this.submitBtn.addEventListener('click', () => {
+      const newNote = this.msgInput.value;
+      this.addNewNote(newNote);
+    });
   }
+  addNewNote(newNote) {
+    this.model.addNote(newNote);
+    this.displayNotes();
+  }
+
   displayNotes() {
     const notes = this.model.getNotes();
 
