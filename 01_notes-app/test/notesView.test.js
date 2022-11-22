@@ -33,4 +33,17 @@ describe('NotesView', () => {
     expect(divsLength).toBe(3);
     expect(divs[divsLength - 1].textContent).toEqual('This is user input.');
   });
+  it('clears old notes when adding notes to the screen on click', () => {
+    const inputTest = document.querySelector('#message-input');
+    const submitBtn = document.querySelector('#message-submit');
+    
+    inputTest.value = 'This is user input 1.';
+    submitBtn.click();
+    inputTest.value = 'This is user input 2.';
+    submitBtn.click();
+
+    const divs = document.querySelectorAll('div.note');
+    const divsLength = divs.length;
+    expect(divsLength).toBe(4);
+  });
 });

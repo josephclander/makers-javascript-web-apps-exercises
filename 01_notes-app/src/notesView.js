@@ -9,6 +9,7 @@ class NotesView {
     this.submitBtn.addEventListener('click', () => {
       const newNote = this.msgInput.value;
       this.addNewNote(newNote);
+      this.msgInput.value = '';
     });
   }
   addNewNote(newNote) {
@@ -17,8 +18,10 @@ class NotesView {
   }
 
   displayNotes() {
-    const notes = this.model.getNotes();
+    const divs = document.querySelectorAll('.note');
+    divs.forEach((note) => note.remove());
 
+    const notes = this.model.getNotes();
     notes.forEach((note) => {
       const new_element = document.createElement('div');
       new_element.className = 'note';
