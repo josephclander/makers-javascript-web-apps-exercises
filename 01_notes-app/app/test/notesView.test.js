@@ -61,16 +61,18 @@ describe('NotesView', () => {
       done();
     });
   });
-  it('applies notes from the server to the page', async (done) => {
-    fetch.mockResponseOnce(JSON.stringify(['fake note 1', 'fake note 2']));
-    
-    await view.displayNotesFromApi();
+  it('applies notes from the server to the page', (done) => {
+    const clientMock = {
+      loadNotes: (callback) => callback(['fake note 1', 'fake note 2']),
+    };
+    const mockView = new NotesView(model, clientMock);
+
+    mockView.displayNotesFromApi();
     const divs = document.querySelectorAll('div.note');
     const divsLength = divs.length;
     expect(divsLength).toBe(2);
     expect(divs[0].textContent).toEqual('fake note 1');
     expect(divs[1].textContent).toEqual('fake note 2');
     done();
-    
   });
 });

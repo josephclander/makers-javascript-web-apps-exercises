@@ -3,7 +3,7 @@ const NotesClient = require('./notesClient');
 require('jest-fetch-mock').enableFetchMocks();
 
 describe('NotesClient class', () => {
-  it('calls fetch and loads notes data', (done) => {
+  it('calls fetch and LOADS notes data', (done) => {
     const client = new NotesClient();
     fetch.mockResponseOnce(
       JSON.stringify({
@@ -17,4 +17,9 @@ describe('NotesClient class', () => {
       done();
     });
   });
+  it('calls fetch and POSTS notes data', () => {
+    const client = new NotesClient();
+    
+  });
+  
 });
