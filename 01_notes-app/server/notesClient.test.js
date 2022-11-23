@@ -17,9 +17,19 @@ describe('NotesClient class', () => {
       done();
     });
   });
-  it('calls fetch and POSTS notes data', () => {
+
+  it('calls fetch and POSTS notes data', (done) => {
     const client = new NotesClient();
-    
+    fetch.mockResponseOnce({
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(['this is a POST test note.']),
+    });
+    client.createNote((response) => {
+      expect(response.status).toBe(200);
+      done();
+    });
   });
-  
 });

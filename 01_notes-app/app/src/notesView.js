@@ -9,7 +9,8 @@ class NotesView {
 
     this.submitBtn.addEventListener('click', () => {
       const newNote = this.msgInput.value;
-      this.addNewNote(newNote);
+      this.client.createNote(newNote);
+      this.displayNotesFromApi();
       this.msgInput.value = '';
     });
   }
