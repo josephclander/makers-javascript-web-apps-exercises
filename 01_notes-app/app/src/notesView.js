@@ -9,8 +9,11 @@ class NotesView {
 
     this.submitBtn.addEventListener('click', () => {
       const newNote = this.msgInput.value;
-      this.client.createNote(newNote);
+      this.client.createNote(newNote, () => {
+        this.displayError();
+      });
       this.displayNotesFromApi();
+      this.displayNotes();
       this.msgInput.value = '';
     });
   }
@@ -33,10 +36,20 @@ class NotesView {
   }
 
   displayNotesFromApi() {
-    this.client.loadNotes((response) => {
-      this.model.setNotes(response);
-      this.displayNotes();
-    });
+    this.client.loadNotes(
+      (response) => {
+        this.model.setNotes(response);
+        this.displayNotes();
+      },
+      () => {
+        this.displayError();
+      }
+    );
+  }
+
+  displayError() {
+    const errorDiv = document.querySelector('#error_msg');
+    errorDiv.textContent = 'Ooops! Something went wrong.';
   }
 }
 
