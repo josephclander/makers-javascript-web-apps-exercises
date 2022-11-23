@@ -30,6 +30,13 @@ class NotesModel {
   reset() {
     this.notes = [];
   }
+
+  /**
+   * setNotes from the api
+   */
+  setNotes(response) {
+    this.notes = response;
+  }
 }
 
 module.exports = NotesModel;

@@ -1,6 +1,7 @@
 class NotesView {
-  constructor(model) {
+  constructor(model, client) {
     this.model = model;
+    this.client = client;
 
     this.mainEl = document.querySelector('#main');
     this.msgInput = document.querySelector('#message-input');
@@ -27,6 +28,13 @@ class NotesView {
       new_element.className = 'note';
       new_element.textContent = note;
       this.mainEl.append(new_element);
+    });
+  }
+
+  displayNotesFromApi() {
+    this.client.loadNotes((response) => {
+      this.model.setNotes(response);
+      this.displayNotes();
     });
   }
 }
