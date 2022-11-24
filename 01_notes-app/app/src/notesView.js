@@ -28,7 +28,7 @@ class NotesView {
   displayNotes() {
     // clear current notes
     this.msgInput.value = '';
-    
+
     const divs = document.querySelectorAll('.note');
     divs.forEach((note) => note.remove());
 
@@ -61,7 +61,6 @@ class NotesView {
   }
 
   displayError(error) {
-    console.error(error.message);
     this.infoBar.textContent = error.message;
   }
 }
