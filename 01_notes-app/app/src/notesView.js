@@ -6,23 +6,29 @@ class NotesView {
     this.mainEl = document.querySelector('#main');
     this.msgInput = document.querySelector('#message-input');
     this.submitBtn = document.querySelector('#message-submit');
+    this.resetBtn = document.querySelector('#reset');
+    this.infoBar = document.querySelector('#infoBar');
 
     this.submitBtn.addEventListener('click', () => {
       const newNote = this.msgInput.value;
-      this.client.createNote(newNote, () => {
-        this.displayError();
-      });
-      this.displayNotesFromApi();
-      this.displayNotes();
-      this.msgInput.value = '';
+      this.client.createNote(
+        newNote,
+        () => this.displayNotesFromApi(),
+        (error) => {
+          this.displayError(error);
+        }
+      );
     });
-  }
-  addNewNote(newNote) {
-    this.model.addNote(newNote);
-    this.displayNotes();
+
+    this.resetBtn.addEventListener('click', () => {
+      this.resetAllNotes();
+    });
   }
 
   displayNotes() {
+    // clear current notes
+    this.msgInput.value = '';
+    
     const divs = document.querySelectorAll('.note');
     divs.forEach((note) => note.remove());
 
@@ -41,15 +47,22 @@ class NotesView {
         this.model.setNotes(response);
         this.displayNotes();
       },
-      () => {
-        this.displayError();
+      (error) => {
+        this.displayError(error);
       }
     );
   }
 
-  displayError() {
-    const errorDiv = document.querySelector('#error_msg');
-    errorDiv.textContent = 'Ooops! Something went wrong.';
+  resetAllNotes() {
+    this.client.reset(
+      () => this.displayNotesFromApi(),
+      (error) => this.displayError(error)
+    );
+  }
+
+  displayError(error) {
+    console.error(error.message);
+    this.infoBar.textContent = error.message;
   }
 }
 

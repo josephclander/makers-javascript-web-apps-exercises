@@ -6,21 +6,33 @@ class NotesClient {
         callback(data);
       })
       .catch((error) => {
-        console.error(error);
-        errorCallback();
+        const newError = new Error('server error');
+        errorCallback(newError);
       });
   }
-  createNote(note, errorCallback) {
+  createNote(note, callback, errorCallback) {
     fetch('http://localhost:3000/notes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ content: note }),
-    }).catch((error) => {
-      console.error(error);
-      errorCallback();
-    });
+    })
+      .then(() => callback())
+      .catch((error) => {
+        const newError = new Error('server error');
+        errorCallback(newError);
+      });
+  }
+  reset(callback, errorCallback) {
+    fetch('http://localhost:3000/notes', {
+      method: 'DELETE',
+    })
+      .then(() => callback())
+      .catch((error) => {
+        const newError = new Error('server error');
+        errorCallback(newError);
+      });
   }
 }
 
